@@ -132,25 +132,34 @@ export function VirtualJoystick() {
       {/* Inventory Button */}
       <button
         onClick={toggleInventory}
+        onTouchStart={(e) => {
+          e.currentTarget.style.transform = 'translate(2px, 2px)';
+          e.currentTarget.style.boxShadow = '2px 2px 0 rgba(0, 0, 0, 0.5)';
+        }}
+        onTouchEnd={(e) => {
+          e.currentTarget.style.transform = 'translate(0, 0)';
+          e.currentTarget.style.boxShadow = '4px 4px 0 rgba(0, 0, 0, 0.5)';
+        }}
         style={{
           position: 'fixed',
           bottom: '80px',
           right: '30px',
           width: '60px',
           height: '60px',
-          borderRadius: '50%',
-          background: 'rgba(78, 204, 163, 0.7)',
-          border: '2px solid #4ecca3',
-          color: '#fff',
+          borderRadius: '0',
+          background: '#4ecca3',
+          border: '3px solid #3ba682',
+          boxShadow: '4px 4px 0 rgba(0, 0, 0, 0.5)',
+          color: '#000',
           fontSize: '24px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           zIndex: 1000,
           cursor: 'pointer',
-          
           fontWeight: 'bold',
           touchAction: 'manipulation',
+          transition: 'transform 0.1s, box-shadow 0.1s',
         }}
       >
         I

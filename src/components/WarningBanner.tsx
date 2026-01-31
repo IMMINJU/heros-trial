@@ -10,13 +10,16 @@ interface Warning {
 }
 
 export function WarningBanner() {
-  const { playTime, incrementWarningCount, narratorMessage, narratorQueue, clearNarratorMessage, setTimeWarningActive, lastActivityTime, queueNarratorMessage } = useGameStore();
+  const { playTime, incrementWarningCount, narratorMessage, narratorQueue, clearNarratorMessage, setTimeWarningActive, lastActivityTime, queueNarratorMessage, gameEnded } = useGameStore();
   const [warnings, setWarnings] = useState<Warning[]>([]);
   const [lastWarningTime, setLastWarningTime] = useState(0);
   const [shake, setShake] = useState(false);
   const [lastIdleCheck, setLastIdleCheck] = useState(0);
 
   useEffect(() => {
+    // Don't show warnings if game has ended
+    if (gameEnded) return;
+
     const interval = getWarningInterval(playTime);
     const timeSinceLastWarning = playTime - lastWarningTime;
 
@@ -59,7 +62,7 @@ export function WarningBanner() {
         setTimeWarningActive(false);
       }, 3000);
     }
-  }, [playTime, lastWarningTime, incrementWarningCount, setTimeWarningActive]);
+  }, [playTime, lastWarningTime, incrementWarningCount, setTimeWarningActive, gameEnded]);
 
   // Handle narrator messages - display for 3 seconds, then clear
   useEffect(() => {
@@ -112,7 +115,7 @@ export function WarningBanner() {
             padding: '10px 14px',
             zIndex: 3000,
             color: '#e8e8e8',
-            
+            fontFamily: "'DotGothic16', sans-serif",
             fontSize: 'clamp(12px, 2.8vw, 14px)',
             animation: 'slideUp 0.3s ease-out, fadeOut 0.5s ease-in 2.5s forwards',
             maxWidth: '700px',
@@ -159,7 +162,7 @@ export function WarningBanner() {
             padding: '12px 16px',
             zIndex: 2000 + index,
             color: '#e8e8e8',
-            
+            fontFamily: "'DotGothic16', sans-serif",
             fontSize: 'clamp(12px, 2.8vw, 14px)',
             animation: 'slideDown 0.3s ease-out, fadeOut 0.5s ease-in 2.5s forwards',
             maxWidth: '700px',

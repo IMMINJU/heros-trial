@@ -47,6 +47,14 @@ export function Inventory() {
             e.currentTarget.style.transform = 'translate(0, 0)';
             e.currentTarget.style.boxShadow = '4px 4px 0 rgba(0, 0, 0, 0.3)';
           }}
+          onTouchStart={(e) => {
+            e.currentTarget.style.transform = 'translate(2px, 2px)';
+            e.currentTarget.style.boxShadow = '2px 2px 0 rgba(0, 0, 0, 0.3)';
+          }}
+          onTouchEnd={(e) => {
+            e.currentTarget.style.transform = 'translate(0, 0)';
+            e.currentTarget.style.boxShadow = '4px 4px 0 rgba(0, 0, 0, 0.3)';
+          }}
           style={{
             background: '#e74c3c',
             border: '3px solid #c0392b',
@@ -55,12 +63,12 @@ export function Inventory() {
             color: '#fff',
             padding: '10px 20px',
             cursor: 'pointer',
-            
+
             fontSize: '14px',
             fontWeight: 'bold',
           }}
         >
-          닫기 (I)
+          {'ontouchstart' in window ? '닫기' : '닫기 (I)'}
         </button>
       </div>
 
@@ -99,6 +107,16 @@ export function Inventory() {
                 e.currentTarget.style.boxShadow = '5px 5px 0 rgba(0, 0, 0, 0.3)';
               }}
               onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(78, 204, 163, 0.1)';
+                e.currentTarget.style.transform = 'translate(0, 0)';
+                e.currentTarget.style.boxShadow = '3px 3px 0 rgba(0, 0, 0, 0.3)';
+              }}
+              onTouchStart={(e) => {
+                e.currentTarget.style.background = 'rgba(78, 204, 163, 0.2)';
+                e.currentTarget.style.transform = 'translate(-2px, -2px)';
+                e.currentTarget.style.boxShadow = '5px 5px 0 rgba(0, 0, 0, 0.3)';
+              }}
+              onTouchEnd={(e) => {
                 e.currentTarget.style.background = 'rgba(78, 204, 163, 0.1)';
                 e.currentTarget.style.transform = 'translate(0, 0)';
                 e.currentTarget.style.boxShadow = '3px 3px 0 rgba(0, 0, 0, 0.3)';

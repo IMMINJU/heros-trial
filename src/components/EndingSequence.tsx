@@ -3,7 +3,7 @@ import { useGameStore } from '../store/gameStore';
 import { soundManager } from '../utils/soundManager';
 
 export function EndingSequence() {
-  const { playTime, warningCount } = useGameStore();
+  const { playTime, warningCount, endGame } = useGameStore();
   const [stage, setStage] = useState(0);
   const [showRetry, setShowRetry] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
@@ -11,6 +11,7 @@ export function EndingSequence() {
   useEffect(() => {
     if (playTime >= 420 && !hasStarted) { // 7 minutes
       setHasStarted(true);
+      endGame(); // Stop the game timer and warnings
       soundManager.playEndingSound();
 
       // Stage progression

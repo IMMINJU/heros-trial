@@ -4,11 +4,12 @@ import { useGameStore } from '../store/gameStore';
 export function useGameTimer() {
   const incrementPlayTime = useGameStore((state) => state.incrementPlayTime);
   const gameStarted = useGameStore((state) => state.gameStarted);
+  const gameEnded = useGameStore((state) => state.gameEnded);
   const isActive = useRef(true);
 
   useEffect(() => {
-    // Only start timer after game has started
-    if (!gameStarted) return;
+    // Only start timer after game has started and before game ends
+    if (!gameStarted || gameEnded) return;
 
     // Handle visibility change (tab switching)
     const handleVisibilityChange = () => {
@@ -41,5 +42,5 @@ export function useGameTimer() {
       window.removeEventListener('focus', handleFocus);
       window.removeEventListener('blur', handleBlur);
     };
-  }, [incrementPlayTime, gameStarted]);
+  }, [incrementPlayTime, gameStarted, gameEnded]);
 }

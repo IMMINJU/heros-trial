@@ -1,0 +1,28 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pixel art style favicon - Hero character -->
+  <!-- Background -->
+  <rect width="32" height="32" fill="#1a1a2e"/>
+
+  <!-- Character body (simplified pixel hero) -->
+  <!-- Head -->
+  <rect x="12" y="8" width="8" height="8" fill="#f39c12"/>
+
+  <!-- Eyes -->
+  <rect x="14" y="10" width="2" height="2" fill="#2c3e50"/>
+  <rect x="16" y="10" width="2" height="2" fill="#2c3e50"/>
+
+  <!-- Body -->
+  <rect x="10" y="16" width="12" height="8" fill="#4ecca3"/>
+
+  <!-- Arms -->
+  <rect x="8" y="18" width="2" height="4" fill="#4ecca3"/>
+  <rect x="22" y="18" width="2" height="4" fill="#4ecca3"/>
+
+  <!-- Legs -->
+  <rect x="12" y="24" width="3" height="4" fill="#34495e"/>
+  <rect x="17" y="24" width="3" height="4" fill="#34495e"/>
+
+  <!-- Simple sword -->
+  <rect x="24" y="12" width="2" height="8" fill="#95a5a6"/>
+  <rect x="23" y="10" width="4" height="2" fill="#e67e22"/>
+</svg>

@@ -31,6 +31,7 @@ interface GameStore {
   isTimeWarningActive: boolean;
   lastActivityTime: number;
   gameStarted: boolean;
+  gameEnded: boolean;
   updatePlayer: (updates: Partial<Player>) => void;
   addItem: (item: Item) => void;
   addExp: (amount: number) => void;
@@ -47,6 +48,7 @@ interface GameStore {
   recordActivity: () => void;
   respawnItems: () => void;
   startGame: () => void;
+  endGame: () => void;
   reset: () => void;
 }
 
@@ -72,6 +74,7 @@ export const useGameStore = create<GameStore>((set) => ({
   isTimeWarningActive: false,
   lastActivityTime: 0,
   gameStarted: false,
+  gameEnded: false,
 
   updatePlayer: (updates) =>
     set((state) => {
@@ -386,6 +389,11 @@ export const useGameStore = create<GameStore>((set) => ({
       gameStarted: true,
     }),
 
+  endGame: () =>
+    set({
+      gameEnded: true,
+    }),
+
   reset: () =>
     set({
       player: initialPlayer,
@@ -401,5 +409,6 @@ export const useGameStore = create<GameStore>((set) => ({
       isTimeWarningActive: false,
       lastActivityTime: 0,
       gameStarted: false,
+      gameEnded: false,
     }),
 }));

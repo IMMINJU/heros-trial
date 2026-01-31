@@ -175,8 +175,17 @@ export function GameUI() {
         fontSize: 'clamp(10px, 2vw, 12px)',
       }}>
         <div style={{ fontWeight: 'bold', marginBottom: '6px' }}>조작법</div>
-        <div>WASD / 방향키 - 이동</div>
-        <div>I - 인벤토리</div>
+        {'ontouchstart' in window ? (
+          <>
+            <div>왼쪽 조이스틱 - 이동</div>
+            <div>오른쪽 버튼 - 인벤토리</div>
+          </>
+        ) : (
+          <>
+            <div>WASD / 방향키 - 이동</div>
+            <div>I - 인벤토리</div>
+          </>
+        )}
       </div>
     </div>
   );
