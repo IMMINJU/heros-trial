@@ -9,9 +9,9 @@ export function VirtualJoystick() {
 
   useEffect(() => {
     const handleTouchStart = (e: TouchEvent) => {
-      // Only activate on the left side of screen for joystick
+      // Only activate on the right side of screen for joystick
       const touch = e.touches[0];
-      if (touch.clientX < window.innerWidth / 2) {
+      if (touch.clientX > window.innerWidth / 2) {
         e.preventDefault();
         touchIdRef.current = touch.identifier;
         setIsActive(true);
@@ -50,15 +50,39 @@ export function VirtualJoystick() {
       setPosition({ x, y });
 
       // Update player position based on joystick
-      const { player, updatePlayer } = useGameStore.getState();
+      const { player, updatePlayer, obstacles } = useGameStore.getState();
       const speed = player.speed;
       const normalizedX = x / maxDistance;
       const normalizedY = y / maxDistance;
 
-      updatePlayer({
-        x: player.x + normalizedX * speed,
-        y: player.y + normalizedY * speed,
-      });
+      let newX = player.x + normalizedX * speed;
+      let newY = player.y + normalizedY * speed;
+
+      // Boundary checks
+      newX = Math.max(0, Math.min(800 - player.width, newX));
+      newY = Math.max(0, Math.min(600 - player.height, newY));
+
+      // Obstacle collision check
+      let collided = false;
+      for (const obstacle of obstacles) {
+        if (
+          newX < obstacle.x + obstacle.width &&
+          newX + player.width > obstacle.x &&
+          newY < obstacle.y + obstacle.height &&
+          newY + player.height > obstacle.y
+        ) {
+          collided = true;
+          break;
+        }
+      }
+
+      // Only update position if no collision
+      if (!collided) {
+        updatePlayer({
+          x: newX,
+          y: newY,
+        });
+      }
 
       // Record activity
       useGameStore.getState().recordActivity();
@@ -101,7 +125,7 @@ export function VirtualJoystick() {
         style={{
           position: 'fixed',
           bottom: '80px',
-          left: '30px',
+          right: '30px',
           width: '100px',
           height: '100px',
           borderRadius: '50%',
@@ -133,25 +157,25 @@ export function VirtualJoystick() {
       <button
         onClick={toggleInventory}
         onTouchStart={(e) => {
-          e.currentTarget.style.transform = 'translate(2px, 2px)';
-          e.currentTarget.style.boxShadow = '2px 2px 0 rgba(0, 0, 0, 0.5)';
+          e.currentTarget.style.transform = 'translate(1px, 1px)';
+          e.currentTarget.style.boxShadow = '1px 1px 0 rgba(0, 0, 0, 0.5)';
         }}
         onTouchEnd={(e) => {
           e.currentTarget.style.transform = 'translate(0, 0)';
-          e.currentTarget.style.boxShadow = '4px 4px 0 rgba(0, 0, 0, 0.5)';
+          e.currentTarget.style.boxShadow = '2px 2px 0 rgba(0, 0, 0, 0.5)';
         }}
         style={{
           position: 'fixed',
-          bottom: '80px',
-          right: '30px',
-          width: '60px',
-          height: '60px',
+          top: '20px',
+          left: '20px',
+          width: '40px',
+          height: '40px',
           borderRadius: '0',
           background: '#4ecca3',
-          border: '3px solid #3ba682',
-          boxShadow: '4px 4px 0 rgba(0, 0, 0, 0.5)',
+          border: '2px solid #3ba682',
+          boxShadow: '2px 2px 0 rgba(0, 0, 0, 0.5)',
           color: '#000',
-          fontSize: '24px',
+          fontSize: '16px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
