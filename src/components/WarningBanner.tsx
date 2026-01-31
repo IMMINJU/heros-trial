@@ -13,7 +13,6 @@ export function WarningBanner() {
   const { playTime, incrementWarningCount, narratorMessage, narratorQueue, clearNarratorMessage, setTimeWarningActive, lastActivityTime, queueNarratorMessage, gameEnded } = useGameStore();
   const [warnings, setWarnings] = useState<Warning[]>([]);
   const [lastWarningTime, setLastWarningTime] = useState(0);
-  const [shake, setShake] = useState(false);
   const [lastIdleCheck, setLastIdleCheck] = useState(0);
 
   useEffect(() => {
@@ -51,11 +50,6 @@ export function WarningBanner() {
 
       soundManager.playWarningSound(phase);
 
-      if (phase === 3) {
-        setShake(true);
-        setTimeout(() => setShake(false), 500);
-      }
-
       setTimeout(() => {
         setWarnings((prev) => prev.filter((w) => w.id !== newWarning.id));
         // Re-enable interaction narrations after warning disappears
@@ -91,12 +85,6 @@ export function WarningBanner() {
     if (phase === 1) return '#3498db';
     if (phase === 2) return '#e74c3c';
     return '#9b59b6';
-  };
-
-  const getPhaseBackground = (phase: number) => {
-    if (phase === 1) return 'rgba(52, 152, 219, 0.15)';
-    if (phase === 2) return 'rgba(231, 76, 60, 0.15)';
-    return 'rgba(155, 89, 182, 0.15)';
   };
 
   return (

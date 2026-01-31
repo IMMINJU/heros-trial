@@ -16,7 +16,7 @@ export function generateRandomItems(count: number = 5): MapItem[] {
   for (let i = 0; i < count; i++) {
     const template = ITEM_TEMPLATES[i % ITEM_TEMPLATES.length];
 
-    let x, y;
+    let x: number, y: number;
     let attempts = 0;
     let validPosition = false;
 
