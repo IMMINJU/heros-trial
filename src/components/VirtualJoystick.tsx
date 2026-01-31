@@ -9,6 +9,12 @@ export function VirtualJoystick() {
 
   useEffect(() => {
     const handleTouchStart = (e: TouchEvent) => {
+      // Ignore touches on inventory or UI elements
+      const target = e.target as HTMLElement;
+      if (target.closest('[data-inventory]') || target.closest('button')) {
+        return;
+      }
+
       // Only activate on the right side of screen for joystick
       const touch = e.touches[0];
       if (touch.clientX > window.innerWidth / 2) {

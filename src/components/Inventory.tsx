@@ -6,33 +6,35 @@ export function Inventory() {
   if (!isInventoryOpen) return null;
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      background: 'rgba(0, 0, 0, 0.95)',
-      border: '4px solid #4ecca3',
-      borderRadius: '0',
-      boxShadow: '8px 8px 0 rgba(0, 0, 0, 0.5)',
-      padding: '20px',
-      minWidth: '500px',
-      maxWidth: '600px',
-      maxHeight: '70vh',
-      overflow: 'auto',
-      zIndex: 1000,
-      pointerEvents: 'auto',
-      color: '#fff',
-      
-      imageRendering: 'pixelated',
-    }}>
+    <div
+      data-inventory
+      style={{
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        background: 'rgba(0, 0, 0, 0.95)',
+        border: '4px solid #4ecca3',
+        borderRadius: '0',
+        boxShadow: '8px 8px 0 rgba(0, 0, 0, 0.5)',
+        padding: 'clamp(10px, 3vw, 20px)',
+        minWidth: 'min(90vw, 500px)',
+        maxWidth: 'min(95vw, 600px)',
+        maxHeight: '70vh',
+        overflow: 'auto',
+        zIndex: 2000,
+        pointerEvents: 'auto',
+        color: '#fff',
+        imageRendering: 'pixelated',
+      }}
+    >
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: '20px',
+        marginBottom: 'clamp(10px, 3vw, 20px)',
       }}>
-        <h2 style={{ margin: 0, fontSize: '24px' }}>인벤토리</h2>
+        <h2 style={{ margin: 0, fontSize: 'clamp(18px, 4vw, 24px)' }}>인벤토리</h2>
         <button
           onClick={toggleInventory}
           onMouseDown={(e) => {
@@ -61,10 +63,9 @@ export function Inventory() {
             borderRadius: '0',
             boxShadow: '4px 4px 0 rgba(0, 0, 0, 0.3)',
             color: '#fff',
-            padding: '10px 20px',
+            padding: 'clamp(6px, 2vw, 10px) clamp(12px, 3vw, 20px)',
             cursor: 'pointer',
-
-            fontSize: '14px',
+            fontSize: 'clamp(12px, 2.5vw, 14px)',
             fontWeight: 'bold',
           }}
         >
@@ -75,9 +76,9 @@ export function Inventory() {
       {inventory.length === 0 ? (
         <div style={{
           textAlign: 'center',
-          padding: '40px 20px',
+          padding: 'clamp(20px, 5vw, 40px) clamp(10px, 3vw, 20px)',
           color: '#888',
-          fontSize: '16px',
+          fontSize: 'clamp(12px, 3vw, 16px)',
         }}>
           인벤토리가 비어있습니다.
           <br />
@@ -86,8 +87,8 @@ export function Inventory() {
       ) : (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
-          gap: '15px',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(120px, 45vw), 1fr))',
+          gap: 'clamp(10px, 2vw, 15px)',
         }}>
           {inventory.map((item) => (
             <div
@@ -97,7 +98,7 @@ export function Inventory() {
                 border: '3px solid #4ecca3',
                 borderRadius: '0',
                 boxShadow: '3px 3px 0 rgba(0, 0, 0, 0.3)',
-                padding: '15px',
+                padding: 'clamp(10px, 2.5vw, 15px)',
                 cursor: 'pointer',
                 transition: 'all 0.1s',
               }}
@@ -124,22 +125,22 @@ export function Inventory() {
               onClick={() => removeItem(item.id)}
             >
               <div style={{
-                fontSize: '32px',
+                fontSize: 'clamp(24px, 5vw, 32px)',
                 textAlign: 'center',
-                marginBottom: '10px',
+                marginBottom: 'clamp(5px, 1.5vw, 10px)',
               }}>
                 {item.icon}
               </div>
               <div style={{
                 fontWeight: 'bold',
                 marginBottom: '5px',
-                fontSize: '14px',
+                fontSize: 'clamp(12px, 2.5vw, 14px)',
                 textAlign: 'center',
               }}>
                 {item.name}
               </div>
               <div style={{
-                fontSize: '11px',
+                fontSize: 'clamp(10px, 2vw, 11px)',
                 color: '#aaa',
                 textAlign: 'center',
               }}>
@@ -152,12 +153,12 @@ export function Inventory() {
 
       {inventory.length > 0 && (
         <div style={{
-          marginTop: '20px',
-          padding: '10px',
+          marginTop: 'clamp(10px, 3vw, 20px)',
+          padding: 'clamp(8px, 2vw, 10px)',
           background: 'rgba(255, 255, 255, 0.05)',
           borderRadius: '0',
           border: '2px solid rgba(255, 255, 255, 0.1)',
-          fontSize: '12px',
+          fontSize: 'clamp(10px, 2.5vw, 12px)',
           color: '#aaa',
           textAlign: 'center',
         }}>

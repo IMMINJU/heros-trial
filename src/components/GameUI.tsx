@@ -177,8 +177,8 @@ export function GameUI() {
         <div style={{ fontWeight: 'bold', marginBottom: '6px' }}>조작법</div>
         {'ontouchstart' in window ? (
           <>
-            <div>왼쪽 조이스틱 - 이동</div>
-            <div>오른쪽 버튼 - 인벤토리</div>
+            <div>오른쪽 조이스틱 - 이동</div>
+            <div>왼쪽 상단 I - 인벤토리</div>
           </>
         ) : (
           <>
